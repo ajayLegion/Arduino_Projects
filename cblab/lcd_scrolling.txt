@@ -1,0 +1,36 @@
+#include <LiquidCrystal.h>
+
+// Initialize the LCD (RS, E, D4, D5, D6, D7)
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+// Define the sentences for both rows
+String firstRowMessage = "The quick brown fox jumps over the lazy dog.";
+String secondRowMessage = "Scroll second line after first line finishes.";
+
+void setup() {
+  // Set up the LCD
+  lcd.begin(16, 2);
+  lcd.clear();
+}
+
+void loop() {
+  // Scroll the first row
+  for (int position = 0; position < firstRowMessage.length(); position++) {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(firstRowMessage.substring(position, position + 16));
+    lcd.setCursor(0, 1);
+    lcd.print("");
+    delay(300); // Adjust scroll speed
+  }
+  // Scroll the second row
+  for (int position = 0; position < secondRowMessage.length(); position++) {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("");
+    lcd.setCursor(0, 1);
+    lcd.print(secondRowMessage.substring(position, position + 16));
+    delay(300); // Adjust scroll speed
+  }
+  delay(2000); // Wait before restarting
+}

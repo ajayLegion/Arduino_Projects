@@ -1,0 +1,48 @@
+#include <LiquidCrystal.h>
+
+// Initialize the LCD (RS, E, D4, D5, D6, D7)
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+const int potPin = A0; // Potentiometer connected to A0
+const float supplyVoltage = 5.0; // Arduino supply voltage
+const int analogMax = 1023; // Maximum ADC value
+const float Rref = 10000.0; // Reference resistor (10k Ohms)
+
+float voltage; // Measured voltage
+float resistance; // Calculated resistance
+float current; // Calculated current
+float power; // Calculated power
+
+void setup() {
+  lcd.begin(16, 2);
+  lcd.print("Initializing...");
+  delay(1000);
+  lcd.clear();
+}
+
+void loop() {
+  // Read voltage
+  int sensorValue = analogRead(potPin);
+  voltage = (sensorValue * supplyVoltage) / analogMax;
+  // Calculate resistance using voltage divider
+  resistance = (voltage * Rref) / (supplyVoltage - voltage);
+  // Calculate current (I = V/R)
+  current = voltage / resistance;
+  // Calculate power (P = V*I)
+  power = voltage * current;
+  // Display on LCD
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("V=");
+  lcd.print(voltage, 2);
+  lcd.print("V R=");
+  lcd.print(resistance, 0);
+  lcd.print("Ohm");
+  lcd.setCursor(0, 1);
+  lcd.print("I=");
+  lcd.print(current * 1000, 2);
+  lcd.print("mA P=");
+  lcd.print(power * 1000, 2);
+  lcd.print("mW");
+  delay(500); // Update every 500ms
+}

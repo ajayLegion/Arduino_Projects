@@ -1,0 +1,87 @@
+// Define the segment pins for the 7-segment display
+int a = 2; // Segment a
+int b = 3; // Segment b
+int c = 4; // Segment c
+int d = 5; // Segment d
+int e = 6; // Segment e
+int f = 7; // Segment f
+int g = 8; // Segment g
+
+void setup() {
+  // Set segment pins as output
+  pinMode(a, OUTPUT);
+  pinMode(b, OUTPUT);
+  pinMode(c, OUTPUT);
+  pinMode(d, OUTPUT);
+  pinMode(e, OUTPUT);
+  pinMode(f, OUTPUT);
+  pinMode(g, OUTPUT);
+}
+
+void displayLetter(char letter) {
+  switch (letter) {
+    case 'A': // Display A
+      digitalWrite(a, HIGH);
+      digitalWrite(b, HIGH);
+      digitalWrite(c, HIGH);
+      digitalWrite(d, LOW);
+      digitalWrite(e, HIGH);
+      digitalWrite(f, HIGH);
+      digitalWrite(g, HIGH);
+      break;
+    case 'b': // Display b
+      digitalWrite(a, LOW);
+      digitalWrite(b, LOW);
+      digitalWrite(c, HIGH);
+      digitalWrite(d, HIGH);
+      digitalWrite(e, HIGH);
+      digitalWrite(f, HIGH);
+      digitalWrite(g, HIGH);
+      break;
+    case 'C': // Display C
+      digitalWrite(a, HIGH);
+      digitalWrite(b, LOW);
+      digitalWrite(c, LOW);
+      digitalWrite(d, HIGH);
+      digitalWrite(e, HIGH);
+      digitalWrite(f, HIGH);
+      digitalWrite(g, LOW);
+      break;
+    case 'd': // Display d
+      digitalWrite(a, LOW);
+      digitalWrite(b, HIGH);
+      digitalWrite(c, HIGH);
+      digitalWrite(d, HIGH);
+      digitalWrite(e, HIGH);
+      digitalWrite(f, LOW);
+      digitalWrite(g, HIGH);
+      break;
+    case 'E': // Display E
+      digitalWrite(a, HIGH);
+      digitalWrite(b, LOW);
+      digitalWrite(c, LOW);
+      digitalWrite(d, HIGH);
+      digitalWrite(e, HIGH);
+      digitalWrite(f, HIGH);
+      digitalWrite(g, HIGH);
+      break;
+    case 'F': // Display F
+      digitalWrite(a, HIGH);
+      digitalWrite(b, LOW);
+      digitalWrite(c, LOW);
+      digitalWrite(d, LOW);
+      digitalWrite(e, HIGH);
+      digitalWrite(f, HIGH);
+      digitalWrite(g, HIGH);
+      break;
+  }
+}
+
+void loop() {
+  // Display letters A to F
+  char letters[] = {'A', 'b', 'C', 'd', 'E', 'F'};
+  for (int i = 0; i < 6; i++) {
+    displayLetter(letters[i]);
+    delay(1000); // Wait 1 second
+  }
+}
